@@ -11,9 +11,7 @@ let activePlayerPanel = document.querySelector(`.player-${activePlayer}-panel`);
         activePlayerPanel.classList.add('active');
 let activePlayerCurrentScore = document.querySelector('.active .player-current-score');
 
-
-
- // Reusabale functions
+// Reusabale functions
 const playerChange = () => {
     activePlayerPanel.classList.remove('active');
     activePlayer = activePlayer === 0 ? 1 : 0;
@@ -77,16 +75,16 @@ btnHold.addEventListener('click', () => {
 //BTN New game 
 
 const resetMainScore = () => {
-    score.map(e => e = 0)
-}
+    score = [0,0];
+    [...document.querySelectorAll(".player-score")].forEach(el => el.textContent=0);
 
-
+}  
 
 btnNewGame.addEventListener('click', () => {
     resetMainScore();
     resetCurrentScore();
-    gameStatusActive = true;
-    
+    gameStatusActive = true; 
+    playerChange()
 
 })
 
