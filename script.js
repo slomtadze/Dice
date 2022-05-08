@@ -2,6 +2,7 @@ const btnNewGame = document.querySelector('.btn-new');
 const btnRollDice = document.querySelector('.btn-roll');
 const btnHold = document.querySelector('.btn-hold');
 const dice = document.querySelector('.dice');
+
 let gameStatusActive = true;
 
 let score = [0,0];
@@ -38,7 +39,16 @@ const rollResult = () => {
     randomNumber === 1 ? change() : activePlayerCurrentScore.textContent = currentScore;
 }
 
-btnRollDice.addEventListener('click', () => gameStatusActive ? rollResult() : alert("Game is Over"))
+btnRollDice.addEventListener('click', () => {
+    if(gameStatusActive == false){
+        alert("Game is Over") 
+    } else if(finalScore()===0) {
+        alert('Set Winner Score')
+    } else if(gameStatusActive && finalScore()>0){
+        rollResult() 
+    } 
+
+})
 
 //BTN Hold
 
@@ -54,7 +64,7 @@ const showWinner = () => {
 }
 
 const checkWinner = () => {
-    if (score[activePlayer] >= 20){
+    if (score[activePlayer] >= finalScore()){
         showWinner ();
         gameStatusActive = false;
     } else {
@@ -72,6 +82,13 @@ btnHold.addEventListener('click', () => {
     }
 })
 
+// Input FinalScore
+const finalScore = () => {
+    const num = document.getElementsByClassName("final-score");
+    return +num[0].value
+}
+
+
 //BTN New game 
 
 const resetMainScore = () => {
@@ -83,9 +100,10 @@ const resetMainScore = () => {
 btnNewGame.addEventListener('click', () => {
     resetMainScore();
     resetCurrentScore();
-    gameStatusActive = true; 
+    gameStatusActive = true;
+    dice.style.display = 'block'; 
+    
     playerChange()
-
 })
 
 
