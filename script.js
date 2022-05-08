@@ -57,9 +57,8 @@ const updatePlayerMainScore = () => {
     document.querySelector('.active .player-score').textContent = score[activePlayer];
 }
 const showWinner = () => {
-    document.querySelector('.active .player-name').textContent = 'winner';
+    document.querySelector('.active .player-name').textContent = 'winner!!!';
     dice.style.display = 'none';
-    activePlayerPanel.classList.remove('active');
     resetCurrentScore();
 }
 
@@ -98,11 +97,12 @@ const resetMainScore = () => {
 }  
 
 btnNewGame.addEventListener('click', () => {
+    document.querySelector('.active .player-name').textContent = `player ${activePlayer === 0? 1 : 2}` 
     resetMainScore();
     resetCurrentScore();
     gameStatusActive = true;
     dice.style.display = 'block'; 
-    
+
     playerChange()
 })
 
